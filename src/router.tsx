@@ -4,6 +4,7 @@ import StartPage from '@/pages/StartPage';
 import ScrollToTop from '@/components/Common/ScrollToTop';
 import SignupPage from '@/pages/SignupPage';
 import SigninPage from '@/pages/SigninPage';
+import ReportPage from '@/pages/ReportPage';
 import OnboardingPage from '@/pages/OnboardingPage';
 import FeedbackPage from '@/pages/FeedbackPage';
 import FeedbackNicknamePage from '@/pages/FeedbackNicknamePage';
@@ -32,8 +33,11 @@ const Router = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/start" element={<StartPage />} />
 
+          <Route path="/report" element={<ReportPage />} />
+
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/signin" element={<SigninPage />} />
+
           <Route path="/onboarding/:id" element={<OnboardingPage />} />
           <Route path="/nickname/:id" element={<FeedbackNicknamePage />} />
           <Route path="/feedback/:id" element={<FeedbackPage />} />

@@ -26,7 +26,11 @@ import { RESTYPE } from '@/types/api/common.ts';
 export const signIn = async (
   signinInfo: SignInRequest,
 ): Promise<RESTYPE<SignInResponse>> => {
-  const response = await apiWithoutAuth.post('/auth/login', signinInfo);
+  const formData = new FormData();
+  formData.append('serial_id', String(signinInfo.serial_id));
+  formData.append('password', String(signinInfo.password));
+
+  const response = await apiWithoutAuth.post('/auth/login', formData);
   return response.data;
 };
 
