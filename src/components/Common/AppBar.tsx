@@ -2,7 +2,7 @@ import BackIcon from '@/assets/icons/BackIcon';
 
 type AppBarProps = {
   theme: 'dark' | 'light'; // "dark" | "light"
-  type: 'logo' | 'pass' | 'back'; // 로고, 건너뛰기, 뒤로가기 버튼 중 어떤 것인지 선택
+  type: 'logo' | 'pass' | 'back' | 'basic'; // 로고, 건너뛰기, 뒤로가기 버튼, 버튼 없음 중 어떤 것인지 선택
   title?: string; // 버튼에 포함되는 글자 (optional)
   isProgress: boolean; // progress바가 존재 여부
   progressPercent?: number; // 얼마나 진행됐는지 퍼센트 단위로 (optional)
@@ -31,7 +31,7 @@ const AppBar = ({
         );
       case 'pass':
         return (
-          <div className="flex justify-between items-center w-full h-16 pt-1 px-[20px]">
+          <div className="flex justify-between items-center w-full h-16 pt-1 px-5">
             <button className="body3 text-grey600" onClick={onClickPassButton}>
               건너뛰기
             </button>
@@ -41,7 +41,16 @@ const AppBar = ({
         );
       case 'back':
         return (
-          <div className="flex items-center gap-3 w-full h-16 pt-1 px-[20px]">
+          <div className="flex items-center gap-3 w-full h-16 pt-1 px-5">
+            <button className="" onClick={onClickBackButton}>
+              <BackIcon theme={theme} />
+            </button>
+            <div className="h3">{title}</div>
+          </div>
+        );
+      case 'basic':
+        return (
+          <div className="flex items-center gap-3 w-full h-16 pt-1 px-7">
             <button className="" onClick={onClickBackButton}>
               <BackIcon theme={theme} />
             </button>
@@ -60,9 +69,9 @@ const AppBar = ({
           {getHeaderStyle()}
         </div>
         {isProgress && (
-          <div className="w-full bg-grey100 h-1">
+          <div className="w-full bg-grey100 h-[3px]">
             <div
-              className="bg-primary h-1 transition-all duration-300 ease-in-out"
+              className="bg-primary h-[3px] transition-all duration-300 ease-in-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>

@@ -63,6 +63,13 @@ function createInstanceWithoutAuth() {
   return instance;
 }
 
+function createAIInstanceWithoutAuth() {
+  const instance = axios.create({
+    baseURL: import.meta.env.VITE_APP_API_AI_BASE_URL,
+  });
+  return instance;
+}
+
 /**
  * 인증이 필요한 API 요청에 사용할 Axios 인스턴스
  * @const {AxiosInstance}
@@ -74,3 +81,5 @@ export const api = createInstance();
  * @const {AxiosInstance}
  */
 export const apiWithoutAuth = createInstanceWithoutAuth();
+
+export const apiAiWithoutAuth = createAIInstanceWithoutAuth();

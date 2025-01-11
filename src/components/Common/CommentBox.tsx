@@ -81,7 +81,7 @@ const CommentBox = ({
           <SendIcon
             className="pr-2"
             fill={`${isValid() ? '#D2FA63' : 'white'}`}
-            onClick={onSubmit}
+            onClick={() => isValid() && onSubmit()}
           />
         </div>
       </div>
