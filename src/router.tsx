@@ -7,7 +7,11 @@ const Layout = () => {
   return (
     <>
       <ScrollToTop />
-      <Outlet />
+      <div className="w-dvw h-dvh bg-white flex justify-center">
+        <div className="w-full max-w-[600px] h-full min-h-fit">
+          <Outlet />
+        </div>
+      </div>
     </>
   );
 };
