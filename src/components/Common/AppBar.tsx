@@ -51,9 +51,6 @@ const AppBar = ({
       case 'basic':
         return (
           <div className="flex items-center gap-3 w-full h-16 pt-1 px-7">
-            <button className="" onClick={onClickBackButton}>
-              <BackIcon theme={theme} />
-            </button>
             <div className="h3">{title}</div>
           </div>
         );

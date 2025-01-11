@@ -17,6 +17,7 @@ const FeedbackDetailResultPage = () => {
         title="홈으로 이동하기"
         bgColor="bg-secondary"
         fontColor="text-primary"
+        onClick={() => navigate('/')}
       />
     </>
   );

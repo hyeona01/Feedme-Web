@@ -17,6 +17,7 @@ const FeedbackResultPage = () => {
         title="피드미 요청하기"
         bgColor="bg-secondary"
         fontColor="text-primary"
+        onClick={() => navigate('/start')}
       />
     </>
   );
