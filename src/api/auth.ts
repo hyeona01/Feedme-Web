@@ -1,5 +1,6 @@
-import { SignInRequest, SignInResponse } from '@/types/api/auth';
-import { api } from './index.ts';
+import { SignInRequest, SignInResponse, SignupRequest } from '@/types/api/auth';
+import { api, apiWithoutAuth } from '@/api/index.ts';
+import { RESTYPE } from '@/types/api/common.ts';
 
 /**
  * 사용자 로그인을 처리하는 함수
@@ -21,9 +22,16 @@ import { api } from './index.ts';
  * signIn({ email: 'user@example.com', password: 'password123' });
  */
 
+// 1.1 사용자 로그인
 export const signIn = async (
   signinInfo: SignInRequest,
-): Promise<SignInResponse> => {
-  const response = await api.post(`/auth/sign-in`, signinInfo);
+): Promise<RESTYPE<SignInResponse>> => {
+  const response = await apiWithoutAuth.post('/auth/login', signinInfo);
+  return response.data;
+};
+
+// 2.1 기본 유저 회원가입
+export const signUp = async (signupInfo: SignupRequest) => {
+  const response = await apiWithoutAuth.post('/auth/sign-up', signupInfo);
   return response.data;
 };

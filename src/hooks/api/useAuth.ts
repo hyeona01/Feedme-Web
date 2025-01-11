@@ -1,8 +1,10 @@
-import { signIn } from '@/api/auth';
-import { SignInResponse } from '@/types/api/auth';
-import { setAccessToken } from '@/utils/auth';
+import { signIn, signUp } from '@/api/auth';
+import { SignInRequest, SignInResponse } from '@/types/api/auth';
+import { setAccessToken, setRefreshToken } from '@/utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import { RESTYPE } from '@/types/api/common';
+import { useUserStore } from '@/store/user';
 
 /**
  * 로그인 프로세스를 처리하는 커스텀 훅
@@ -28,16 +30,49 @@ import { useMutation } from '@tanstack/react-query';
  * return <LoginForm onSubmit={handleSubmit} />;
  */
 
+// 1.1 사용자 로그인 훅
 export const useSignIn = () => {
   const navigate = useNavigate();
+  const { updateName } = useUserStore();
+
   return useMutation({
     mutationFn: signIn,
-    onSuccess: (data: SignInResponse) => {
-      setAccessToken(data.access_token);
+    onSuccess: (data: RESTYPE<SignInResponse>) => {
+      if (data.success) {
+        setAccessToken(data.data.access_token);
+        setRefreshToken(data.data.refresh_token);
+
+        updateName(data.data.name);
+
+        navigate('/');
+      }
+    },
+    onError: () => {
+      alert('아이디 혹은 비밀번호를 다시 확인해주세요.');
+    },
+  });
+};
+
+// 2.1  기본 유저 회원가입 훅
+export const useSignUp = (userInfo: SignInRequest) => {
+  const navigate = useNavigate();
+  const { mutate: signin } = useSignIn(); // 로그인 훅
+
+  return useMutation({
+    mutationFn: signUp,
+    onSuccess: () => {
+      console.log('회원가입 성공');
+
+      // 1초 후에 로그인 시도
+      setTimeout(() => {
+        signin({ serial_id: userInfo.serial_id, password: userInfo.password });
+        console.log('로그인 성공');
+      }, 1000);
+
       navigate('/');
     },
     onError: () => {
-      navigate('/signin');
+      alert('입력 정보를 다시 확인해주세요.');
     },
   });
 };

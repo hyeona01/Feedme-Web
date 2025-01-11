@@ -2,6 +2,10 @@ export const setAccessToken = (token: string | null) => {
   localStorage.setItem('authorization', token || '');
 };
 
+export const setRefreshToken = (token: string | null) => {
+  localStorage.setItem('refresh_token', token || '');
+};
+
 /**
  * 로컬 스토리지에서 인증 토큰을 가져오는 함수
  *
@@ -17,7 +21,14 @@ export const getAccessToken = () => {
   return localStorage.getItem('authorization');
 };
 
+export const getRefreshToken = () => {
+  return localStorage.getItem('refresh_token');
+};
 
 export const deleteAccessToken = () => {
   localStorage.removeItem('authorization');
+};
+
+export const deleteRefreshToken = () => {
+  localStorage.removeItem('refresh_token');
 };

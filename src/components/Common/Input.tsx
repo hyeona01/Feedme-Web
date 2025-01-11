@@ -32,7 +32,7 @@ const inputStyler = (status: InputStatus, isLight: boolean) => {
     case INPUT_STATUS.DISABLED:
       return isLight
         ? 'bg-white text-[#E1E1E1] border-b-[#E1E1E1]'
-        : 'bg-black text-[#646464] border-b-[#646464]';
+        : 'bg-black text-[#AFAFAF] border-b-[#AFAFAF]';
     case INPUT_STATUS.ACTIVE:
       return isLight
         ? 'bg-white text-[#191919] border-b-[#D2FA63]'
@@ -52,6 +52,7 @@ const Input = ({
   isInvalid,
   value,
   comment,
+  label,
 }: InputProps) => {
   // 현재 입력 필드 상태
   const [currentStatus, setCurrentStatus] = useState<InputStatus>(
@@ -65,35 +66,30 @@ const Input = ({
   // 비밀번호 표시/숨김 상태
   const [showPassword, setShowPassword] = useState(false);
 
-  // INPUT_STATUS 상태를 업데이트
+  // 포커스 상태 관리
+  const [isFocused, setIsFocused] = useState(false);
+
+  // INPUT_STATUS 상태를 업데이트: isInvalid, value, isFocused 변경 시 상태를 설정
   useEffect(() => {
     if (isInvalid) {
       setCurrentStatus(INPUT_STATUS.ERROR);
+    } else if (isFocused) {
+      setCurrentStatus(INPUT_STATUS.ACTIVE);
     } else if (value) {
       setCurrentStatus(INPUT_STATUS.FILLED);
     } else {
       setCurrentStatus(INPUT_STATUS.DISABLED);
     }
-  }, [isInvalid, value]);
+  }, [isInvalid, value, isFocused]);
 
   // 입력값 변경 핸들러
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
-  const handleFocus = () => setCurrentStatus(INPUT_STATUS.ACTIVE);
-  const handleBlur = () => {
-    setCurrentStatus(
-      isInvalid
-        ? INPUT_STATUS.ERROR
-        : value
-          ? INPUT_STATUS.FILLED
-          : INPUT_STATUS.DISABLED,
-    );
-  };
-
   return (
     <div className={`font-normal ${isLight ? 'bg-white' : 'bg-black'}`}>
+      <div className="text-[#AFAFAF] font-bold text-xs">{label}</div>
       <div
         className={`w-full flex items-center border-b-2 ${inputStyler(currentStatus, isLight)}`}
       >
@@ -101,8 +97,8 @@ const Input = ({
           placeholder={placeholder}
           value={value ?? ''}
           className={`w-full outline-none placeholder:text-[var(--input-color)] py-[0.625rem] ${inputStyler(currentStatus, isLight)}`}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          onFocus={() => setIsFocused(true)} // 포커스 상태 활성화
+          onBlur={() => setIsFocused(false)} // 포커스 상태 비활성화
           onChange={handleInputChange}
           type={
             inputType === 'PASSWORD'
