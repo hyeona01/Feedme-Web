@@ -7,7 +7,7 @@ const ReportPage = () => {
 
   return (
     <div className="w-full h-screen flex flex-col items-center">
-      <ReportNavbar />
+      <ReportNavbar title="모아둔 먹이" />
       <div className="w-fit my-8 flex justify-center bg-[rgba(255,255,255,0.16)] rounded-3xl">
         <div
           onClick={() => setType('like')}

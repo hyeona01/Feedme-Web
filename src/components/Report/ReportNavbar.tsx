@@ -1,7 +1,11 @@
 import BackIcon from '@/assets/icons/BackIcon';
 import { useNavigate } from 'react-router-dom';
 
-const ReportNavbar = () => {
+type ReportNavbarProps = {
+  title: string;
+};
+
+const ReportNavbar = ({ title }: ReportNavbarProps) => {
   const navigate = useNavigate();
 
   return (
@@ -9,7 +13,7 @@ const ReportNavbar = () => {
       <div className="absolute left-5" onClick={() => navigate('/')}>
         <BackIcon theme="dark" />
       </div>
-      <div className="text-[#FAFAF5] text-lg font-bold">모아둔 먹이</div>
+      <div className="text-[#FAFAF5] text-lg font-bold">{title}</div>
     </div>
   );
 };

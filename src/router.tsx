@@ -11,6 +11,7 @@ import FeedbackNicknamePage from '@/pages/FeedbackNicknamePage';
 import FeedbackResultPage from '@/pages/FeedbackResultPage';
 import FeedbackDetailPage from '@/pages/FeedbackDetailPage';
 import FeedbackDetailResultPage from '@/pages/FeedbackDetailResultPage';
+import ProjectDetailPage from '@/pages/ProjectDetailPage';
 
 const Layout = () => {
   return (
@@ -34,11 +35,12 @@ const Router = () => {
           <Route path="/start" element={<StartPage />} />
 
           <Route path="/report" element={<ReportPage />} />
+          <Route path="/project/:id" element={<ProjectDetailPage />} />
 
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/signin" element={<SigninPage />} />
 
-          <Route path="/onboarding/:id" element={<OnboardingPage />} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
           <Route path="/nickname/:id" element={<FeedbackNicknamePage />} />
           <Route path="/feedback/:id" element={<FeedbackPage />} />
           <Route path="/feedback-result" element={<FeedbackResultPage />} />

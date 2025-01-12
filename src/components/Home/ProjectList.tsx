@@ -3,6 +3,7 @@ import DarkCTAIcon from '@/assets/icons/DarkCTAIcon.svg?react';
 import { useNavigate } from 'react-router-dom';
 import Tag from '@/components/Common/Tag';
 import { mode } from '@/constants/components';
+import { useGetProjectList } from '@/hooks/api/useMainpage';
 
 type ProjectListProps = {
   onOpen: () => void;
@@ -10,6 +11,8 @@ type ProjectListProps = {
 
 const ProjectList = ({ onOpen }: ProjectListProps) => {
   const navigate = useNavigate();
+
+  const { data } = useGetProjectList();
 
   return (
     <div className="bg-white rounded-3xl px-5 py-4 flex flex-col">
@@ -25,21 +28,14 @@ const ProjectList = ({ onOpen }: ProjectListProps) => {
       {/* 프로젝트 리스트 */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Tag
-            onClick={() => navigate(`/report/${0}`)}
-            title="삐약톤"
-            type={mode.LIGHT}
-          />
-          <Tag
-            onClick={() => navigate(`/report/${0}`)}
-            title="삐약톤"
-            type={mode.LIGHT}
-          />
-          <Tag
-            onClick={() => navigate(`/report/${0}`)}
-            title="삐약톤"
-            type={mode.LIGHT}
-          />
+          {data?.data.projects.map((project) => (
+            <Tag
+              key={project.id}
+              onClick={() => navigate(`/project/${project.id}`)}
+              title={project.title}
+              type={mode.LIGHT}
+            />
+          ))}
         </div>
         <DarkCTAIcon onClick={onOpen} />
       </div>
