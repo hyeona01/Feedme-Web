@@ -30,7 +30,7 @@ const CreationModal = ({ onClose }: CreationModalProps) => {
   };
   return (
     <div className="h-screen w-screen fixed bg-[rgb(0,0,0,0.50)] flex justify-center items-center px-6">
-      <div className="w-full bg-white rounded-3xl flex flex-col items-center p-4 gap-6">
+      <div className="w-full max-w-[600px] bg-white rounded-3xl flex flex-col items-center p-4 gap-6">
         <div className="w-full pt-3 px-4 flex flex-col justify-center gap-6">
           <div className="text-secondary text-xl font-bold text-center">
             프로젝트를 생성해보세요!
