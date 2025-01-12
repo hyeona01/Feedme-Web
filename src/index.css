@@ -74,4 +74,23 @@ body {
     font-weight: 400; /* Regular */
     font-size: 0.625rem; /* 10px */
   }
+
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 1rem;
+  }
+  
+  .th, .td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  
+  .th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+
 }

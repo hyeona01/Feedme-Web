@@ -1,6 +1,7 @@
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import HomePage from '@/pages/HomePage';
 import StartPage from '@/pages/StartPage';
+import EditPage from '@/pages/EditPage';
 import ScrollToTop from '@/components/Common/ScrollToTop';
 import SignupPage from '@/pages/SignupPage';
 import SigninPage from '@/pages/SigninPage';
@@ -33,6 +34,8 @@ const Router = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/start" element={<StartPage />} />
+          
+          <Route path="/edit-md" element={<EditPage />} />
 
           <Route path="/report" element={<ReportPage />} />
           <Route path="/project/:id" element={<ProjectDetailPage />} />
