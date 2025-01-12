@@ -1,15 +1,13 @@
-import { useGetReport, useGetReportTags } from '@/hooks/api/useReport';
+import { useGetReport } from '@/hooks/api/useReport';
 import { useUserStore } from '@/store/user';
-import { useState } from 'react';
 
 type ProjectDetailSectionProps = { type: string };
 
 const ProjectDetailSection = ({ type }: ProjectDetailSectionProps) => {
   const { name } = useUserStore();
-  const [closed, setClosed] = useState(true);
 
   const { data: report } = useGetReport(type == 'like');
-  const { data: reportTags } = useGetReportTags(type == 'like');
+  // const { data: reportTags } = useGetReportTags(type == 'like');
 
   return (
     <div className="h-full w-full bg-white p-6 flex flex-col gap64 rounded-t-3xl">
@@ -46,11 +44,11 @@ const ProjectDetailSection = ({ type }: ProjectDetailSectionProps) => {
           </div>
           <div className="p-2 flex flex-col gap-4">
             <div className="flex flex-col gap-1">
-              {reportTags?.data.tags.map((tag) => (
-                <div className="bg-white w-full rounded-xl p-3 text-[#191919] text-xs font-bold">
-                  팀원 별명
-                </div>
-              ))}
+              {/* {reportTags?.data.tags.map((tag) => ( */}
+              <div className="bg-white w-full rounded-xl p-3 text-[#191919] text-xs font-bold">
+                팀원 별명
+              </div>
+              {/* ))} */}
             </div>
           </div>
         </div>

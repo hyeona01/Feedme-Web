@@ -1,5 +1,5 @@
 import { SignInRequest, SignInResponse, SignupRequest } from '@/types/api/auth';
-import { api, apiWithoutAuth } from '@/api/index.ts';
+import { apiWithoutAuth } from '@/api/index.ts';
 import { RESTYPE } from '@/types/api/common.ts';
 
 /**
